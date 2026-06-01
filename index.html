@@ -37,12 +37,12 @@
 
         /* --- Sidebar --- */
         .sidebar { 
-            width: 270px; background-color: var(--sidebar); border-right: 1px solid var(--border); 
+            width: 275px; background-color: var(--sidebar); border-right: 1px solid var(--border); 
             display: flex; flex-direction: column; padding: 24px 16px; z-index: 1000; transition: var(--transition);
         }
         
         @media (max-width: 900px) {
-            .sidebar { position: fixed; left: -270px; top: 0; bottom: 0; }
+            .sidebar { position: fixed; left: -275px; top: 0; bottom: 0; }
             .sidebar.open { left: 0; box-shadow: 15px 0 40px rgba(0,0,0,0.08); }
         }
 
@@ -61,7 +61,6 @@
             cursor: pointer; transition: var(--transition); margin-bottom: 32px; width: 100%;
         }
 
-        /* --- History with Delete --- */
         .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 0 8px 10px 8px; }
         .nav-label { font-size: 0.7rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; opacity: 0.6; }
         .clear-all-link { font-size: 0.65rem; font-weight: 700; color: var(--danger); text-transform: uppercase; cursor: pointer; }
@@ -104,7 +103,7 @@
 
         #workspace-view { display: none; padding: 40px 24px; max-width: 1200px; margin: 0 auto; width: 100%; }
         .controls-bar { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
-        select { background: var(--surface); border: 1px solid var(--border); padding: 14px 20px; border-radius: 12px; font-size: 0.95rem; font-weight: 500; cursor: pointer; min-width: 160px; }
+        select { background: var(--surface); border: 1px solid var(--border); padding: 14px 18px; border-radius: 12px; font-size: 0.9rem; font-weight: 500; cursor: pointer; min-width: 170px; max-height: 200px; }
         .swap-btn { background: var(--surface); border: 1px solid var(--border); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition); }
         .swap-btn:hover { border-color: var(--accent); color: var(--accent); transform: rotate(180deg); }
 
@@ -167,7 +166,7 @@
         <header>
             <div style="display: flex; align-items: center;">
                 <button class="menu-btn" onclick="toggleSidebar()"><i data-lucide="menu"></i></button>
-                <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary)">v5.6 / workspace_pro</div>
+                <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary)">v6.0 / multilingual_hub</div>
             </div>
             <div class="status-badge"><div class="dot"></div> ONLINE</div>
         </header>
@@ -179,7 +178,7 @@
                 <circle cx="50" cy="58" r="4" fill="var(--text-primary)"/>
             </svg>
             <h1 class="hero-title">Every Voice Understood.</h1>
-            <p class="hero-subtitle">High-fidelity AI translation for technical and creative teams.</p>
+            <p class="hero-subtitle">High-fidelity AI translation supporting over 30 global and regional languages.</p>
             <div class="suggested-grid">
                 <div class="suggested-card" onclick="quick('en', 'ta')">English to Tamil <i data-lucide="arrow-right"></i></div>
                 <div class="suggested-card" onclick="quick('ta', 'en')">Tamil to English <i data-lucide="arrow-right"></i></div>
@@ -191,19 +190,11 @@
         <div id="workspace-view">
             <div class="controls-bar">
                 <select id="src-lang">
-                    <option value="en">English (US)</option>
-                    <option value="ta">Tamil (தமிழ்)</option>
-                    <option value="hi">Hindi (हिन्दी)</option>
-                    <option value="fr">French (Français)</option>
-                    <option value="ja">Japanese (日本語)</option>
+                    <!-- Languages added dynamically via JS -->
                 </select>
                 <button class="swap-btn" onclick="swapLangs()"><i data-lucide="repeat"></i></button>
                 <select id="tgt-lang">
-                    <option value="en">English (US)</option>
-                    <option value="ta" selected>Tamil (தமிழ்)</option>
-                    <option value="hi">Hindi (हिन्दी)</option>
-                    <option value="fr">French (Français)</option>
-                    <option value="ja">Japanese (日本語)</option>
+                    <!-- Languages added dynamically via JS -->
                 </select>
             </div>
 
@@ -249,15 +240,46 @@
         const execBtn = document.getElementById('exec-btn');
         const histContainer = document.getElementById('history-list');
 
-        let history = JSON.parse(localStorage.getItem('voxora_final_db')) || [];
+        // Extended Language Library
+        const languages = [
+            { code: 'af', name: 'Afrikaans' }, { code: 'ar', name: 'Arabic' }, { code: 'bn', name: 'Bengali' },
+            { code: 'zh-CN', name: 'Chinese (Simplified)' }, { code: 'zh-TW', name: 'Chinese (Traditional)' },
+            { code: 'nl', name: 'Dutch' }, { code: 'en', name: 'English' }, { code: 'fr', name: 'French' },
+            { code: 'de', name: 'German' }, { code: 'el', name: 'Greek' }, { code: 'gu', name: 'Gujarati' },
+            { code: 'hi', name: 'Hindi' }, { code: 'id', name: 'Indonesian' }, { code: 'it', name: 'Italian' },
+            { code: 'ja', name: 'Japanese' }, { code: 'kn', name: 'Kannada' }, { code: 'ko', name: 'Korean' },
+            { code: 'ml', name: 'Malayalam' }, { code: 'mr', name: 'Marathi' }, { code: 'ne', name: 'Nepali' },
+            { code: 'pa', name: 'Punjabi' }, { code: 'pt', name: 'Portuguese' }, { code: 'ru', name: 'Russian' },
+            { code: 'es', name: 'Spanish' }, { code: 'sv', name: 'Swedish' }, { code: 'ta', name: 'Tamil' },
+            { code: 'te', name: 'Telugu' }, { code: 'th', name: 'Thai' }, { code: 'tr', name: 'Turkish' },
+            { code: 'ur', name: 'Urdu' }, { code: 'vi', name: 'Vietnamese' }
+        ];
+
+        // Populate selects
+        function populateLanguages() {
+            languages.forEach(lang => {
+                const opt1 = new Option(lang.name, lang.code);
+                const opt2 = new Option(lang.name, lang.code);
+                srcSelect.add(opt1);
+                tgtSelect.add(opt2);
+            });
+            srcSelect.value = 'en';
+            tgtSelect.value = 'ta';
+        }
+        populateLanguages();
+
+        let history = JSON.parse(localStorage.getItem('voxora_v6_db')) || [];
         renderHistory();
 
         function toggleSidebar() { sidebar.classList.toggle('open'); overlay.classList.toggle('active'); }
         sourceInput.oninput = () => document.getElementById('char-count').innerText = `${sourceInput.value.length} / 5000`;
         function goHome() { landing.style.display = 'flex'; workspace.style.display = 'none'; }
-        function quick(s, t) { landing.style.display = 'none'; workspace.style.display = 'block'; srcSelect.value = s; tgtSelect.value = t; if(window.innerWidth > 900) sourceInput.focus(); }
-        function swapLangs() { const t = srcSelect.value; srcSelect.value = tgtSelect.value; tgtSelect.value = t; }
-        function clearInput() { sourceInput.value = ''; outputBox.innerText = 'Waiting...'; outputBox.style.color = "var(--text-secondary)"; }
+        
+        function quick(s, t) { 
+            landing.style.display = 'none'; workspace.style.display = 'block'; 
+            srcSelect.value = s; tgtSelect.value = t; 
+            if(window.innerWidth > 900) sourceInput.focus(); 
+        }
 
         async function handleFileUpload(event) {
             const file = event.target.files[0]; if (!file) return;
@@ -300,8 +322,8 @@
 
         function saveHistory(q, a) {
             history.unshift({ q, a, id: Date.now() });
-            if (history.length > 15) history.pop();
-            localStorage.setItem('voxora_final_db', JSON.stringify(history));
+            if (history.length > 20) history.pop();
+            localStorage.setItem('voxora_v6_db', JSON.stringify(history));
             renderHistory();
         }
 
@@ -321,14 +343,13 @@
 
         function deleteHistoryItem(id, e) {
             e.stopPropagation();
-            // Use String comparison to avoid type mismatches
             history = history.filter(item => String(item.id) !== String(id));
-            localStorage.setItem('voxora_final_db', JSON.stringify(history));
+            localStorage.setItem('voxora_v6_db', JSON.stringify(history));
             renderHistory();
         }
 
         function clearAllHistory() {
-            if (confirm("Delete all history?")) { history = []; localStorage.setItem('voxora_final_db', JSON.stringify(history)); renderHistory(); }
+            if (confirm("Delete all history?")) { history = []; localStorage.setItem('voxora_v6_db', JSON.stringify(history)); renderHistory(); }
         }
 
         function loadHistory(id) {
@@ -336,6 +357,8 @@
             if(item) { quick(srcSelect.value, tgtSelect.value); sourceInput.value = item.q; outputBox.innerText = item.a; outputBox.style.color = "var(--text-primary)"; if(window.innerWidth <= 900) toggleSidebar(); }
         }
 
+        function swapLangs() { const t = srcSelect.value; srcSelect.value = tgtSelect.value; tgtSelect.value = t; }
+        function clearInput() { sourceInput.value = ''; outputBox.innerText = 'Waiting...'; outputBox.style.color = "var(--text-secondary)"; }
         function copyText() { navigator.clipboard.writeText(outputBox.innerText); alert("Copied!"); }
         function downloadText() { const b = new Blob([outputBox.innerText], {type:'text/plain'}); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = `voxora_${Date.now()}.txt`; a.click(); }
         function listenText() { const s = new SpeechSynthesisUtterance(outputBox.innerText); s.lang = tgtSelect.value; window.speechSynthesis.speak(s); }
