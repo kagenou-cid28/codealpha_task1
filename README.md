@@ -7,15 +7,6 @@ Voxora is a modern language translation workspace built to make multilingual com
 Unlike traditional translator applications, Voxora focuses on creating a clean workspace experience inspired by modern productivity tools and developer platforms. Users can translate text, upload documents, listen to translated content, and manage their translation history from a single interface.
 
 Developed as part of the **CodeAlpha Artificial Intelligence Internship – Task 1 (Language Translation Tool)**.
-
----
-
-## Live Demo
-
-Experience Voxora:
-
-https://your-live-link.com
-
 ---
 
 ## Project Overview
