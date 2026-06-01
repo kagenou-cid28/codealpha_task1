@@ -170,6 +170,6 @@ Building AI-powered tools that combine functionality, usability, and modern user
 
 ---
 
-## ⭐ Voxora
+## Voxora
 
 **Every Voice Understood.**
