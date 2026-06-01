@@ -1,4 +1,4 @@
-# 🌍 Voxora
+# Voxora
 
 ### Every Voice Understood.
 
@@ -10,7 +10,7 @@ Developed as part of the **CodeAlpha Artificial Intelligence Internship – Task
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
 Experience Voxora:
 
@@ -18,7 +18,7 @@ https://your-live-link.com
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 Language barriers shouldn't slow communication.
 
@@ -35,12 +35,12 @@ The goal was to create something that feels closer to a professional productivit
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-### 🌐 Multi-Language Translation
+### Multi-Language Translation
 Translate content between multiple supported languages with a simple and intuitive interface.
 
-### 📄 Document Translation
+### Document Translation
 Upload:
 
 - TXT files
@@ -48,16 +48,16 @@ Upload:
 
 Voxora automatically extracts text and prepares it for translation.
 
-### 🔊 Text-to-Speech
+###  Text-to-Speech
 Listen to translated content directly within the browser.
 
-### 📋 Copy & Export
+###  Copy & Export
 Quickly:
 
 - Copy translated text
 - Download translations as TXT files
 
-### 🕘 Smart Translation History
+###  Smart Translation History
 All translations are automatically stored using Local Storage.
 
 Users can:
@@ -66,7 +66,7 @@ Users can:
 - Delete individual entries
 - Clear entire history
 
-### 📱 Responsive Design
+###  Responsive Design
 Optimized for:
 
 - Desktop
@@ -75,7 +75,7 @@ Optimized for:
 
 ---
 
-## 🎨 Design Inspiration
+## Design Inspiration
 
 The UI is inspired by modern developer-focused applications such as:
 
@@ -94,7 +94,7 @@ Design Principles:
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 ### Frontend
 
@@ -120,7 +120,7 @@ Design Principles:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 Voxora is intentionally built as a lightweight frontend-first application.
 
@@ -144,7 +144,7 @@ All translation history is stored locally in the user's browser.
 
 ---
 
-## 💡 Highlights
+## Highlights
 
 ✅ Translation Workspace UI
 
@@ -171,7 +171,7 @@ Additional Features Implemented:
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 ### Krish Shree Surya S
 
